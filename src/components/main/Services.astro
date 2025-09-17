@@ -1,0 +1,164 @@
+---
+import { Check, CreditCard, Truck, Shield, Clock, Globe } from '@lucide/astro';
+---
+
+<section class="py-24 px-6 bg-gradient-to-br from-gray-50 to-gray-100">
+  <div class="max-w-7xl mx-auto space-y-24">
+
+    <!-- MÉTODOS DE PAGO -->
+    <div class="text-center space-y-12 reveal">
+      <div class="flex items-center justify-center gap-6 flex-wrap">
+        <h2 class="text-4xl md:text-5xl font-bold text-[#1e3a8a]">
+          Método de pago simple y seguro
+        </h2>
+        <div class="bg-blue-600 p-4 rounded-2xl shadow-lg">
+          <CreditCard class="w-10 h-10 text-white" />
+        </div>
+      </div>
+
+      <div class="bg-[#1e3a8a] rounded-2xl p-10 shadow-xl max-w-2xl mx-auto space-y-6 reveal">
+        <div class="flex items-center gap-4">
+          <div class="bg-green-500 rounded-full p-2 flex-shrink-0">
+            <Check class="w-6 h-6 text-white" />
+          </div>
+          <p class="text-white text-xl md:text-2xl font-semibold">
+            Paga <span class="font-bold">50%</span> al pedir tu producto
+          </p>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="bg-green-500 rounded-full p-2 flex-shrink-0">
+            <Check class="w-6 h-6 text-white" />
+          </div>
+          <p class="text-white text-xl md:text-2xl font-semibold">
+            Paga <span class="font-bold">50%</span> al recibirlo en Venezuela
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-green-500 rounded-xl p-8 shadow-lg max-w-2xl mx-auto reveal">
+        <div class="flex flex-wrap items-center justify-center gap-12 text-white">
+          <div class="text-center">
+            <p class="font-bold text-lg">Efectivo</p>
+            <p class="text-2xl font-bold">USD $</p>
+          </div>
+          <div class="text-center">
+            <p class="font-bold text-lg">Pago</p>
+            <p class="text-2xl font-bold">Móvil</p>
+          </div>
+          <div class="text-center">
+            <p class="text-3xl font-bold">Zelle</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPRA Y ENTREGA -->
+    <div class="text-center space-y-12 reveal">
+      <div class="flex flex-col md:flex-row items-center justify-center gap-4">
+        <h2 class="text-4xl md:text-5xl font-bold text-[#1e3a8a]">Compra en USA</h2>
+        <img src="flags/usa.png" alt="Bandera USA" class="h-12 w-auto object-contain" />
+      </div>
+
+      <div class="flex flex-col md:flex-row items-center justify-center gap-4">
+        <h2 class="text-4xl md:text-5xl font-bold text-[#1e3a8a]">Recibe en Venezuela</h2>
+        <img src="flags/venezuela.png" alt="Bandera Venezuela" class="h-12 w-auto object-contain" />
+      </div>
+
+      <div class="bg-[#1e3a8a] rounded-2xl p-10 shadow-xl max-w-2xl mx-auto reveal">
+        <p class="text-white text-xl md:text-2xl italic mb-3">¿No sabes comprar online?</p>
+        <p class="text-green-400 text-2xl md:text-3xl font-bold">Nosotros lo hacemos por ti</p>
+      </div>
+
+      <div class="flex items-center justify-center gap-4 reveal">
+        <h3 class="text-3xl md:text-4xl font-bold text-[#1e3a8a]">Solo pagas el envío</h3>
+        <Truck class="w-10 h-10 text-amber-600" />
+      </div>
+    </div>
+
+    <!-- SLIDER -->
+    <div class="text-center space-y-12 reveal">
+      <h3 class="text-3xl md:text-4xl font-bold text-[#1e3a8a]">
+        Compra en tus tiendas favoritas
+      </h3>
+
+      <div class="bg-white rounded-2xl p-8 shadow-xl overflow-hidden reveal">
+        <div class="slider-container">
+          <div class="slider-track">
+            <div class="slider-item"><img src="/stores/amazon.png" alt="Amazon" /></div>
+            <div class="slider-item"><img src="/stores/ebay.png" alt="eBay" /></div>
+            <div class="slider-item"><img src="/stores/walmart.png" alt="Walmart" /></div>
+            <div class="slider-item"><img src="/stores/shein.png" alt="Shein" /></div>
+            <div class="slider-item"><img src="/stores/vans.png" alt="Vans" /></div>
+            <div class="slider-item"><img src="/stores/nike.png" alt="Nike" /></div>
+            <div class="slider-item"><img src="/stores/apple.png" alt="Apple" /></div>
+            <div class="slider-item"><img src="/stores/adidas.png" alt="Adidas" /></div>
+            <!-- duplicados -->
+            <div class="slider-item"><img src="/stores/amazon.png" alt="Amazon" /></div>
+            <div class="slider-item"><img src="/stores/ebay.png" alt="eBay" /></div>
+            <div class="slider-item"><img src="/stores/walmart.png" alt="Walmart" /></div>
+            <div class="slider-item"><img src="/stores/shein.png" alt="Shein" /></div>
+            <div class="slider-item"><img src="/stores/vans.png" alt="Vans" /></div>
+            <div class="slider-item"><img src="/stores/nike.png" alt="Nike" /></div>
+            <div class="slider-item"><img src="/stores/apple.png" alt="Apple" /></div>
+            <div class="slider-item"><img src="/stores/adidas.png" alt="Adidas" /></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BENEFICIOS -->
+    <div class="grid md:grid-cols-3 gap-8 reveal">
+      <div class="bg-white rounded-2xl p-8 shadow-lg text-center hover:shadow-xl transition-shadow reveal">
+        <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+          <Shield class="w-8 h-8 text-blue-600" />
+        </div>
+        <h4 class="text-xl font-bold text-[#1e3a8a] mb-2">100% Seguro</h4>
+        <p class="text-gray-600">Tus compras están protegidas desde USA hasta Venezuela</p>
+      </div>
+
+      <div class="bg-white rounded-2xl p-8 shadow-lg text-center hover:shadow-xl transition-shadow reveal">
+        <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+          <Clock class="w-8 h-8 text-green-600" />
+        </div>
+        <h4 class="text-xl font-bold text-[#1e3a8a] mb-2">Envío Rápido</h4>
+        <p class="text-gray-600">Recibe tus productos en tiempo récord</p>
+      </div>
+
+      <div class="bg-white rounded-2xl p-8 shadow-lg text-center hover:shadow-xl transition-shadow reveal">
+        <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+          <Globe class="w-8 h-8 text-yellow-600" />
+        </div>
+        <h4 class="text-xl font-bold text-[#1e3a8a] mb-2">Cobertura Nacional</h4>
+        <p class="text-gray-600">Entregamos en toda Venezuela</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Slider */
+  .slider-container { width: 100%; overflow: hidden; }
+  .slider-track {
+    display: flex; align-items: center; gap: 4rem;
+    animation: slide 25s linear infinite;
+    width: max-content;
+  }
+  .slider-item { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; }
+  .slider-item img { height: 4rem; max-height: 6rem; width: auto; object-fit: contain; }
+  @keyframes slide { 0% {transform: translateX(0);} 100% {transform: translateX(-50%);} }
+  .slider-track:hover { animation-play-state: paused; }
+
+  /* Scroll reveal */
+  .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+  .reveal.active { opacity: 1; transform: translateY(0); }
+</style>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add("active");
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+</script>

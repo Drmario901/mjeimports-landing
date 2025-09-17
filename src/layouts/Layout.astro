@@ -1,14 +1,25 @@
+---
+import '../styles/global.css'
+import { ClientRouter } from 'astro:transitions';
+const { title = "MJE Imports" } = Astro.props;
+import Footer from '../components/ui/footer.astro';
+import Header from '../components/ui/header.astro';
+---
+
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<ClientRouter />
+		<title>{title}</title>
 	</head>
 	<body>
-		<slot />
+		<Header />
+			<slot />
+		<Footer />
 	</body>
 </html>
 

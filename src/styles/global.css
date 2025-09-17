@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@import "flag-icons/css/flag-icons.min.css";
+@plugin "daisyui";
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+

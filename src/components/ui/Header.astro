@@ -1,0 +1,61 @@
+---
+import {
+  Home,
+  Users,
+  Briefcase,
+  HelpCircle,
+  Mail,
+  Menu
+} from '@lucide/astro';
+
+const navLinks = [
+  { label: 'Inicio', href: '#inicio', icon: Home },
+  { label: 'Quiénes Somos', href: '#quienes-somos', icon: Users },
+  { label: 'Servicios', href: '#servicios', icon: Briefcase },
+  { label: 'Cómo Funciona', href: '#como-funciona', icon: HelpCircle },
+  { label: 'Contacto', href: '#contacto', icon: Mail },
+];
+---
+
+<header class="bg-white shadow-md z-50 w-full fixed top-0 left-0">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+
+    <div class="flex items-center">
+      <img src="/logo.png" alt="Logo MJE Imports" class="h-14 w-auto" />
+    </div>
+
+    <nav class="hidden lg:flex space-x-4 items-center">
+      {navLinks.map(({ href, label, icon: Icon }) => (
+        <a
+          href={href}
+          class="btn btn-ghost text-sm font-medium flex items-center gap-1 hover:text-[#002f6c] transition-colors duration-200"
+        >
+          <Icon size={18} style="color: #002f6c" />
+          {label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="lg:hidden dropdown dropdown-end">
+      <label tabindex="0" class="btn btn-ghost">
+        <Menu size={24} />
+      </label>
+      <ul
+        tabindex="0"
+        class="menu menu-sm dropdown-content mt-3 z-[100] p-2 shadow bg-white rounded-box w-52"
+      >
+        {navLinks.map(({ href, label, icon: Icon }) => (
+          <li>
+            <a
+              href={href}
+              class="flex items-center gap-2 hover:text-[#002f6c] transition-colors duration-200"
+            >
+              <Icon size={18} style="color: #002f6c" />
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</header>
