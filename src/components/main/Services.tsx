@@ -75,9 +75,9 @@ const ShippingSection: React.FC = () => {
           color: "#1f2937",
           position: "relative",
           overflow: "hidden",
-          padding: "5rem 2rem 6rem", // 👈 reducido el padding-top
-          minHeight: "calc(100vh - 60px)", // 👈 compensación exacta del header
-          scrollMarginTop: "140px", // 👈 corrige el salto del ancla (#servicios)
+          padding: "5rem 2rem 6rem", 
+          minHeight: "calc(100vh - 60px)",
+          scrollMarginTop: "140px", 
         }}
       >
         <div
@@ -177,7 +177,7 @@ const ShippingSection: React.FC = () => {
               La forma más confiable y rápida de recibir tus compras internacionales
             </p>
           </div>
-          
+
           <div
             id="store-logos"
             className="observe"
