@@ -1,10 +1,18 @@
 ---
 import Hero from '../components/main/Hero.astro';
 import Layout from '../layouts/Layout.astro';
-import Services from '../components/main/Services.astro';
+import ShippingSection from '../components/main/Services.tsx';
+import AboutUs from '../components/main/AboutUs.tsx';
+import HowItWorks from '../components/main/HowItWorks.tsx';
+import WhatsAppFloat from '../components/main/WhatsAppFloat.tsx';
+import ContactUs from '../components/main/ContactUs.jsx';
 ---
 
 <Layout>
+	<WhatsAppFloat phoneNumber="584142946305" message="¡Hola! estoy interesado en sus servicios" />
 	<Hero />
-	<Services />
+	<ShippingSection client:load />
+	<AboutUs client:load/>
+	<HowItWorks client:load/>
+	<ContactUs client:load/>
 </Layout>

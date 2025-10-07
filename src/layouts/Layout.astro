@@ -7,27 +7,58 @@ import Header from '../components/ui/header.astro';
 ---
 
 <!doctype html>
-<html lang="en" data-theme="light">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<ClientRouter />
-		<title>{title}</title>
-	</head>
-	<body>
-		<Header />
-			<slot />
-		<Footer />
-	</body>
+<html lang="es" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <ClientRouter />
+    <title>{title}</title>
+
+    <meta name="description" content="Compra en tus tiendas favoritas de Estados Unidos como Amazon, Nike, Apple o Shein, y recibe tus productos de forma rápida y segura en Venezuela con MJE Imports." />
+    <meta name="keywords" content="importaciones, compras USA, envíos a Venezuela, MJE Imports, comprar en Amazon desde Venezuela, Shein Venezuela, envíos internacionales, carga aérea y marítima" />
+    <meta name="author" content="MJE Imports" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#004a8a" />
+
+    <link rel="icon" type="image/png" href="/logo.png" />
+
+    <meta property="og:title" content="MJE Imports | Compra en USA, recibe en Venezuela" />
+    <meta property="og:description" content="Tu aliado confiable para traer productos desde Estados Unidos. Compras seguras, entregas rápidas y soporte personalizado en toda Venezuela." />
+    <meta property="og:image" content="https://mjeimports.store/logo.png" />
+    <meta property="og:url" content="https://mjeimports.store/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="MJE Imports" />
+    <meta property="og:locale" content="es_VE" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "MJE Imports",
+        "url": "https://mjeimports.store/",
+        "logo": "https://mjeimports.store/logo.png",
+        "sameAs": [
+          "https://www.instagram.com/mjeimports.ve",
+          "https://wa.me/584142946305"
+        ],
+        "description": "MJE Imports ofrece compras internacionales desde USA hacia Venezuela, con entregas rápidas, seguras y seguimiento en tiempo real."
+      }
+    </script>
+  </head>
+
+  <body>
+    <Header />
+    <slot />
+    <Footer />
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
 </style>
