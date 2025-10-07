@@ -3,7 +3,7 @@ import '../styles/global.css'
 import { ClientRouter } from 'astro:transitions';
 const { title = "MJE Imports" } = Astro.props;
 import Footer from '../components/ui/Footer.astro';
-import Header from '../components/ui/Header.astro';
+import Header from '../components/ui/Header';
 ---
 
 <!doctype html>
@@ -48,7 +48,7 @@ import Header from '../components/ui/Header.astro';
   </head>
 
   <body>
-    <Header />
+    <Header client:load />
     <slot />
     <Footer />
   </body>
