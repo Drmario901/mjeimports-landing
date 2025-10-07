@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { Home, Users, Briefcase, HelpCircle, Mail, Menu, X } from "lucide-react"
 import { useState, useEffect } from "react"
 
@@ -59,9 +58,7 @@ export default function Header() {
     }
   }
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
   return (
     <header
@@ -80,8 +77,8 @@ export default function Header() {
               key={href}
               href={href}
               onClick={(e) => handleLinkClick(e, href)}
-              className={`group flex items-center gap-2 px-3 py-2 rounded-lg font-medium text-sm text-gray-700 transition-all duration-200 relative ${
-                activeLink === href ? "text-[#002f6c] font-semibold" : ""
+              className={`group flex items-center gap-2 px-3 py-2 rounded-lg font-medium text-sm transition-all duration-200 relative ${
+                activeLink === href ? "text-[#002f6c] font-semibold" : "text-gray-700"
               }`}
             >
               <Icon size={18} className="text-[#002f6c]" />
@@ -105,10 +102,10 @@ export default function Header() {
       </div>
 
       <nav
-        className={`absolute top-[100%] mt-2 left-0 w-full bg-white shadow-md rounded-b-2xl flex-col items-center transition-all duration-300 ${
+        className={`absolute left-0 w-full bg-white shadow-md flex flex-col items-center transition-all duration-300 overflow-hidden ${
           isMenuOpen
-            ? "opacity-100 pointer-events-auto translate-y-0"
-            : "opacity-0 pointer-events-none translate-y-[-20px]"
+            ? "max-h-[400px] opacity-100 translate-y-0"
+            : "max-h-0 opacity-0 -translate-y-2"
         }`}
       >
         {navLinks.map(({ href, label, icon: Icon }) => (
@@ -116,7 +113,7 @@ export default function Header() {
             key={href}
             href={href}
             onClick={(e) => handleLinkClick(e, href)}
-            className={`w-full flex items-center justify-start gap-3 px-6 py-3 border-b border-gray-100 font-medium transition-all duration-200 hover:bg-[#002f6c]/10 hover:text-[#002f6c] ${
+            className={`w-full flex items-center justify-start gap-3 px-6 py-3 border-t border-gray-100 font-medium transition-all duration-200 hover:bg-[#002f6c]/10 hover:text-[#002f6c] ${
               activeLink === href ? "text-[#002f6c] font-semibold" : "text-gray-700"
             }`}
           >
