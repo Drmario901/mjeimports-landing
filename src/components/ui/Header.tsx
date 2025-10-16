@@ -9,7 +9,7 @@ const navLinks = [
   { label: "Servicios", href: "#servicios", icon: Briefcase },
   { label: "Quiénes Somos", href: "#quienes-somos", icon: Users },
   { label: "Cómo Funciona", href: "#como-funciona", icon: HelpCircle },
-  { label: "Contacto", href: "#contact", icon: Mail },
+  { label: "Contacto", href: "#contacto", icon: Mail },
 ]
 
 export default function Header() {
