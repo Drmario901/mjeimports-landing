@@ -150,7 +150,6 @@ export default function ContactForm() {
           confirmButtonColor: "#2ad37a",
         })
       } else {
-        // 200 sin success o estructura inesperada
         Swal.fire({
           icon: "warning",
           title: "Respuesta inesperada",
@@ -235,7 +234,7 @@ export default function ContactForm() {
 
   return (
     <section
-      id="contact"
+      id="contacto"
       style={{
         width: "100%",
         backgroundColor: "#ffffff",
