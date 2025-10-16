@@ -67,9 +67,8 @@ export default function AboutUs() {
           }`}
         >
           <p className="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
-            En <strong>MJE Imports</strong> hacemos que comprar en Estados Unidos sea fácil, seguro y sin
-            complicaciones. Nos encargamos de todo el proceso: desde la compra hasta la entrega, con envíos
-            aéreos y marítimos según tus necesidades.
+            Somos una <strong>empresa venezolana</strong> dedicada a conectar tus compras en Estados Unidos con Venezuela.
+            Ofrecemos un servicio confiable y transparente, encargándonos de todo el proceso con envíos aéreos y marítimos para que importar sea fácil, rápido y seguro.
           </p>
         </div>
 

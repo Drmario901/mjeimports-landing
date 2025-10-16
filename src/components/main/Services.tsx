@@ -77,7 +77,7 @@ const ShippingSection: React.FC = () => {
           overflow: "hidden",
           padding: "5rem 2rem 6rem", 
           minHeight: "calc(100vh - 60px)",
-          scrollMarginTop: "140px", 
+          scrollMarginTop: "80px", 
         }}
       >
         <div

@@ -22,14 +22,83 @@ import { Plane, Check, ArrowRight, Package, Truck, Shield, Clock } from '@lucide
     opacity: 1;
     transform: translateY(0);
   }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url("/desk-hero.webp");
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+    transition: background-image 0.4s ease;
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 47, 108, 0.55),
+      rgba(0, 47, 108, 0.75)
+    );
+    z-index: 1;
+  }
+
+  @media (max-width: 768px) {
+    .hero-bg {
+      background-image: url("/res-hero.webp"); 
+      background-position: center;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    section#inicio {
+      padding-top: 6rem;
+      padding-bottom: 6rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    .max-w-7xl {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .max-w-2xl {
+      max-width: 100%;
+    }
+
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    h1 {
+      font-size: 1.7rem;
+    }
+
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .bg-white\/10 {
+      padding: 1rem !important;
+    }
+  }
 </style>
 
-<!-- HERO -->
 <section 
   id="inicio" 
-  class="relative bg-gradient-to-br from-[#002f6c] via-[#003d7a] to-[#004a8a] text-white py-24 px-6 pb-32 overflow-hidden"
+  class="relative text-white py-24 px-6 overflow-hidden"
 >
-  <div class="absolute inset-0 opacity-10">
+  <div class="hero-bg"></div>
+  <div class="overlay"></div>
+
+  <div class="absolute inset-0 opacity-10 z-0">
     <div class="absolute top-20 left-10 animate-float">
       <Package size={40} class="text-white/20" />
     </div>
@@ -45,46 +114,49 @@ import { Plane, Check, ArrowRight, Package, Truck, Shield, Clock } from '@lucide
     <div class="order-1 lg:order-none text-center lg:text-left space-y-8 max-w-2xl">
       <h1 class="text-4xl sm:text-5xl font-bold leading-tight reveal">
         Traemos tus productos desde 
-        <span class="inline-flex items-center gap-4 text-[#2ad37a]">
+        <span class="inline-flex items-center gap-3 text-[#2ad37a]">
           USA 
-          <img src="/flags/usa.png" alt="USA" class="h-12 w-auto object-contain" />
+          <img src="/flags/usa.png" alt="USA" class="h-10 w-auto object-contain" />
         </span> 
-        <span class="inline-flex items-center gap-4 text-[#2ad37a]">
+        <span class="inline-flex items-center gap-3 text-[#2ad37a]">
          hasta Venezuela 
-          <img src="/flags/venezuela.png" alt="Venezuela" class="h-12 w-auto object-contain" />
+          <img src="/flags/venezuela.png" alt="Venezuela" class="h-10 w-auto object-contain" />
         </span>
       </h1>
 
       <p class="text-lg sm:text-xl opacity-90 reveal">
-        Compra en tiendas de Estados Unidos y nosotros los llevamos hasta la puerta de tu casa en Venezuela.
-        Tecnología, ropa, calzado, repuestos y más… ¡sin complicaciones!
+        Compra en tus tiendas favoritas y recibe tus perfumes, relojes, tecnología, ropa, calzado, repuestos ¡y mucho más!
+      </p>
+
+      <p class="text-lg sm:text-xl opacity-90 reveal font-bold">
+        Fácil, rápido y sin complicaciones 🚀
       </p>
 
       <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10 reveal">
         <ul class="space-y-4 text-white/90">
-          <li class="flex items-start gap-3">
+          <li class="flex items-start gap-3 justify-center lg:justify-start">
             <div class="flex-shrink-0 w-6 h-6 bg-[#2ad37a] rounded-full flex items-center justify-center">
               <Check size={14} class="text-white" />
             </div>
-            <span>Entregas aéreas semanales y marítimas mensuales</span>
+            <span class="text-base sm:text-lg">Entregas aéreas semanales y marítimas mensuales</span>
           </li>
-          <li class="flex items-start gap-3">
+          <li class="flex items-start gap-3 justify-center lg:justify-start">
             <div class="flex-shrink-0 w-6 h-6 bg-[#2ad37a] rounded-full flex items-center justify-center">
               <Check size={14} class="text-white" />
             </div>
-            <span>Solo 50% de adelanto para encargar tu producto</span>
+            <span class="text-base sm:text-lg">Solo 50% de adelanto para encargar tu producto</span>
           </li>
-          <li class="flex items-start gap-3">
+          <li class="flex items-start gap-3 justify-center lg:justify-start">
             <div class="flex-shrink-0 w-6 h-6 bg-[#2ad37a] rounded-full flex items-center justify-center">
               <Check size={14} class="text-white" />
             </div>
-            <span>Seguimiento personalizado de tu pedido</span>
+            <span class="text-base sm:text-lg">Seguimiento personalizado de tu pedido</span>
           </li>
-          <li class="flex items-start gap-3">
+          <li class="flex items-start gap-3 justify-center lg:justify-start">
             <div class="flex-shrink-0 w-6 h-6 bg-[#2ad37a] rounded-full flex items-center justify-center">
               <Check size={14} class="text-white" />
             </div>
-            <span>Precios justos y entrega garantizada</span>
+            <span class="text-base sm:text-lg">Precios justos y entrega garantizada</span>
           </li>
         </ul>
       </div>
@@ -92,14 +164,14 @@ import { Plane, Check, ArrowRight, Package, Truck, Shield, Clock } from '@lucide
       <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-6 reveal">
         <a
           href="#servicios"
-          class="group btn bg-[#2ad37a] text-[#002f6c] hover:bg-[#25b86a] hover:scale-105 transition-all duration-300 font-semibold px-6 py-3 shadow-lg hover:shadow-xl flex items-center justify-center"
+          class="group bg-[#2ad37a] text-[#002f6c] hover:bg-[#25b86a] hover:scale-105 transition-all duration-300 font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl flex items-center justify-center"
         >
           <span>Ver Servicios</span>
           <ArrowRight size={18} class="ml-2 group-hover:translate-x-1 transition-transform" />
         </a>
         <a
           href="#contact"
-          class="group btn border-2 border-white text-white bg-transparent hover:bg-white hover:text-[#002f6c] hover:scale-105 transition-all duration-300 font-semibold px-6 py-3 shadow-lg hover:shadow-xl flex items-center justify-center"
+          class="group border-2 border-white text-white bg-transparent hover:bg-white hover:text-[#002f6c] hover:scale-105 transition-all duration-300 font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl flex items-center justify-center"
         >
           <Plane size={18} class="mr-2 group-hover:rotate-12 transition-transform" />
           <span>Solicitar Encargo</span>
@@ -108,42 +180,42 @@ import { Plane, Check, ArrowRight, Package, Truck, Shield, Clock } from '@lucide
     </div>
 
     <div class="order-2 lg:order-none w-full max-w-md grid grid-cols-1 sm:grid-cols-2 gap-6">
-      <div class="bg-[#003d7a]/30 rounded-2xl p-8 border border-[#2ad37a]/40 hover:bg-[#003d7a]/40 transition-all duration-300 reveal">
+      <div class="backdrop-blur-md bg-white/10 rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 reveal shadow-md">
         <div class="text-center space-y-4">
           <div class="w-16 h-16 bg-[#2ad37a] rounded-full flex items-center justify-center mx-auto">
             <Truck size={32} class="text-white" />
           </div>
-          <h3 class="font-semibold text-base">Envío Rápido</h3>
+          <h3 class="font-semibold text-base sm:text-lg">Envío Rápido</h3>
           <p class="text-sm opacity-80">Entregas semanales</p>
         </div>
       </div>
 
-      <div class="bg-[#003d7a]/30 rounded-2xl p-8 border border-[#2ad37a]/40 hover:bg-[#003d7a]/40 transition-all duration-300 reveal">
+      <div class="backdrop-blur-md bg-white/10 rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 reveal shadow-md">
         <div class="text-center space-y-4">
           <div class="w-16 h-16 bg-[#002f6c] rounded-full flex items-center justify-center mx-auto">
             <Shield size={32} class="text-white" />
           </div>
-          <h3 class="font-semibold text-base">100% Seguro</h3>
+          <h3 class="font-semibold text-base sm:text-lg">100% Seguro</h3>
           <p class="text-sm opacity-80">Garantía total</p>
         </div>
       </div>
 
-      <div class="bg-[#003d7a]/30 rounded-2xl p-8 border border-[#2ad37a]/40 hover:bg-[#003d7a]/40 transition-all duration-300 reveal">
+      <div class="backdrop-blur-md bg-white/10 rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 reveal shadow-md">
         <div class="text-center space-y-4">
           <div class="w-16 h-16 bg-[#2ad37a] rounded-full flex items-center justify-center mx-auto">
             <Package size={32} class="text-white" />
           </div>
-          <h3 class="font-semibold text-base">Seguimiento</h3>
-          <p class="text-sm opacity-80">Te damos el estatus de tus pedidos</p>
+          <h3 class="font-semibold text-base sm:text-lg">Seguimiento</h3>
+          <p class="text-sm opacity-80">Estatus en tiempo real</p>
         </div>
       </div>
 
-      <div class="bg-[#003d7a]/30 rounded-2xl p-8 border border-[#2ad37a]/40 hover:bg-[#003d7a]/40 transition-all duration-300 reveal">
+      <div class="backdrop-blur-md bg-white/10 rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 reveal shadow-md">
         <div class="text-center space-y-4">
           <div class="w-16 h-16 bg-[#002f6c] rounded-full flex items-center justify-center mx-auto">
             <Clock size={32} class="text-white" />
           </div>
-          <h3 class="font-semibold text-base">24/7</h3>
+          <h3 class="font-semibold text-base sm:text-lg">24/7</h3>
           <p class="text-sm opacity-80">Soporte continuo</p>
         </div>
       </div>
@@ -151,29 +223,15 @@ import { Plane, Check, ArrowRight, Package, Truck, Shield, Clock } from '@lucide
   </div>
 </section>
 
-<!-- <div class="h-16 bg-[#004a8a]"></div> -->
-
-<section id="servicios" class="scroll-mt-[80px] mt-0 bg-gray-50">
-
-</section>
-
-<section id="contacto" class="scroll-mt-[80px] mt-0 bg-gray-100">
-
-</section> 
-
 <script>
   const revealElements = document.querySelectorAll(".reveal");
-
   const revealOnScroll = () => {
     const triggerBottom = window.innerHeight * 0.85;
     revealElements.forEach(el => {
       const rect = el.getBoundingClientRect();
-      if (rect.top < triggerBottom) {
-        el.classList.add("active");
-      }
+      if (rect.top < triggerBottom) el.classList.add("active");
     });
   };
-
   window.addEventListener("scroll", revealOnScroll);
   revealOnScroll();
 </script>
