@@ -6,10 +6,12 @@ import AboutUs from '../components/main/AboutUs.tsx';
 import HowItWorks from '../components/main/HowItWorks.tsx';
 import WhatsAppFloat from '../components/main/WhatsAppFloat.tsx';
 import ContactUs from '../components/main/ContactUs.jsx';
+import BlackFridayPopup from '../components/main/BlackFridayPopup';
 ---
 
 <Layout>
 	<WhatsAppFloat phoneNumber="584142946305" message="¡Hola! estoy interesado en sus servicios" />
+	<BlackFridayPopup active={true} client:load/>
 	<Hero />
 	<ShippingSection client:load />
 	<AboutUs client:load/>
