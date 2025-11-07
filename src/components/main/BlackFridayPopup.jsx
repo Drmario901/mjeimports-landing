@@ -6,7 +6,7 @@ const MS_DAY = 86400000;
 
 function getBlackFridayRange(year = new Date().getFullYear()) {
   const nov1 = new Date(year, 10, 1);
-  const day = nov1.getDay(); 
+  const day = nov1.getDay();
   const toFirstThu = (4 - day + 7) % 7;
   const firstThu = new Date(year, 10, 1 + toFirstThu);
   const fourthThu = new Date(firstThu);
@@ -39,7 +39,12 @@ export default function BlackFridayModal({ active = true }) {
   const target = isBefore ? start : isDuring ? end : null;
 
   const headerText = isBefore ? "¡Black Friday!" : isDuring ? "¡Es hoy! 🎉" : "Black Friday finalizó";
-  const subLabel = isBefore ? "Comienza en" : isDuring ? "Aprovecha las ofertas" : "Hasta el próximo año";
+
+  useEffect(() => {
+    if (isOpen) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "";
+    return () => (document.body.style.overflow = "");
+  }, [isOpen]);
 
   useEffect(() => {
     if (!active) return;
@@ -50,7 +55,6 @@ export default function BlackFridayModal({ active = true }) {
 
     const daysUntil = Math.ceil((start.getTime() - Date.now()) / MS_DAY);
     const intervalMs = daysUntil <= 7 ? MS_DAY : MS_DAY * 2;
-
     const shouldShow = !lastShown || Date.now() - lastShown >= intervalMs;
 
     if (shouldShow) {
@@ -64,19 +68,6 @@ export default function BlackFridayModal({ active = true }) {
     const id = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(id);
   }, [isOpen]);
-
-  useEffect(() => {
-    if (!isOpen) return;
-    if (now > end) {
-      setClosing(true);
-      const t = setTimeout(() => {
-        localStorage.setItem("blackfriday_last_shown", String(Date.now()));
-        setIsOpen(false);
-        setClosing(false);
-      }, 300);
-      return () => clearTimeout(t);
-    }
-  }, [now, end, isOpen]);
 
   const handleClose = () => {
     setClosing(true);
@@ -93,7 +84,7 @@ export default function BlackFridayModal({ active = true }) {
     <Modal
       isOpen={isOpen}
       onRequestClose={handleClose}
-      shouldCloseOnOverlayClick={true}
+      shouldCloseOnOverlayClick={false} 
       style={{
         overlay: {
           backgroundColor: "rgba(0, 47, 108, 0.75)",
@@ -143,7 +134,7 @@ export default function BlackFridayModal({ active = true }) {
       </h2>
 
       <p style={{ color: "#002f6c", fontSize: "1rem", fontWeight: 600, marginBottom: 12 }}>
-        Aprovecha <span style={{ color: "#2ad37a", fontWeight: 700 }}>Black Friday</span> de tus tiendas favoritas con nosotros
+        Aprovecha <span style={{ color: "#2ad37a", fontWeight: 700 }}>Black Friday</span> de tus tiendas favoritas con nosotros 🎁
       </p>
 
       <p style={{ color: "#002f6c", fontSize: "0.9rem", opacity: 0.85, marginBottom: 10 }}>
