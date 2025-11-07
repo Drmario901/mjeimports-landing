@@ -143,7 +143,7 @@ export default function BlackFridayModal({ active = true }) {
       </h2>
 
       <p style={{ color: "#002f6c", fontSize: "1rem", fontWeight: 600, marginBottom: 12 }}>
-        Aprovecha <span style={{ color: "#2ad37a", fontWeight: 700 }}>Black Friday</span> de tus tiendas favoritas con nosotros 🎁
+        Aprovecha <span style={{ color: "#2ad37a", fontWeight: 700 }}>Black Friday</span> de tus tiendas favoritas con nosotros
       </p>
 
       <p style={{ color: "#002f6c", fontSize: "0.9rem", opacity: 0.85, marginBottom: 10 }}>
