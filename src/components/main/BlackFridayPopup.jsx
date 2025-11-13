@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Modal from "react-modal";
 import { X } from "lucide-react";
+import confetti from "canvas-confetti";
 
 const MS_DAY = 86400000;
 
@@ -13,8 +14,10 @@ function getBlackFridayRange(year = new Date().getFullYear()) {
   fourthThu.setDate(firstThu.getDate() + 21);
   const bf = new Date(fourthThu);
   bf.setDate(fourthThu.getDate() + 1);
+
   const start = new Date(bf.getFullYear(), bf.getMonth(), bf.getDate(), 0, 0, 0);
   const end = new Date(bf.getFullYear(), bf.getMonth(), bf.getDate(), 23, 59, 59);
+
   return { start, end, date: bf };
 }
 
@@ -31,6 +34,7 @@ function diffParts(ms) {
 export default function BlackFridayModal({ active = true }) {
   const [isOpen, setIsOpen] = useState(false);
   const [closing, setClosing] = useState(false);
+  const [hasFired, setHasFired] = useState(false); 
   const [now, setNow] = useState(() => new Date());
   const { start, end, date } = useMemo(() => getBlackFridayRange(), []);
 
@@ -39,6 +43,40 @@ export default function BlackFridayModal({ active = true }) {
   const target = isBefore ? start : isDuring ? end : null;
 
   const headerText = isBefore ? "¡Black Friday!" : isDuring ? "¡Es hoy! 🎉" : "Black Friday finalizó";
+
+  useEffect(() => {
+    let canvas = document.getElementById("confetti-mje");
+
+    if (!canvas) {
+      canvas = document.createElement("canvas");
+      canvas.id = "confetti-mje";
+      canvas.style.position = "fixed";
+      canvas.style.top = 0;
+      canvas.style.left = 0;
+      canvas.style.width = "100%";
+      canvas.style.height = "100%";
+      canvas.style.pointerEvents = "none";
+      canvas.style.zIndex = 2000; 
+      document.body.appendChild(canvas);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isOpen && !hasFired) {
+      const canvas = document.getElementById("confetti-mje");
+      if (!canvas) return;
+
+      const shoot = confetti.create(canvas, { resize: true });
+
+      shoot({
+        particleCount: 150,
+        spread: 85,
+        origin: { y: 0.6 },
+      });
+
+      setHasFired(true); 
+    }
+  }, [isOpen, hasFired]);
 
   useEffect(() => {
     if (isOpen) document.body.style.overflow = "hidden";
@@ -84,7 +122,7 @@ export default function BlackFridayModal({ active = true }) {
     <Modal
       isOpen={isOpen}
       onRequestClose={handleClose}
-      shouldCloseOnOverlayClick={false} 
+      shouldCloseOnOverlayClick={false}
       style={{
         overlay: {
           backgroundColor: "rgba(0, 47, 108, 0.75)",
@@ -92,8 +130,8 @@ export default function BlackFridayModal({ active = true }) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          transition: "opacity 0.3s ease",
           opacity: closing ? 0 : 1,
+          transition: "opacity 0.3s ease",
         },
         content: {
           inset: "unset",
@@ -112,10 +150,8 @@ export default function BlackFridayModal({ active = true }) {
         },
       }}
     >
-
       <button
         onClick={handleClose}
-        aria-label="Cerrar"
         style={{
           position: "absolute",
           top: "12px",
@@ -146,7 +182,7 @@ export default function BlackFridayModal({ active = true }) {
         })}`}
       </p>
 
-      {isBefore || isDuring ? (
+      {(isBefore || isDuring) && (
         <div
           style={{
             border: "1px solid rgba(42,211,122,0.35)",
@@ -184,7 +220,7 @@ export default function BlackFridayModal({ active = true }) {
             </p>
           )}
         </div>
-      ) : null}
+      )}
 
       <div
         style={{
