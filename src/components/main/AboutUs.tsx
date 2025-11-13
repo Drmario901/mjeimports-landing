@@ -132,18 +132,21 @@ export default function AboutUs() {
           }`}
         >
           <div
-            className="text-center py-10 rounded-2xl shadow-lg border-t-4"
+            className="text-center py-8 px-4 rounded-2xl shadow-lg border-t-4 md:py-10"
             style={{ backgroundColor: "#002f6c", borderColor: "#2ad37a" }}
           >
-            <p className="text-2xl md:text-3xl font-bold text-white">
-              Tu compra en Estados Unidos, más fácil que nunca.
+            <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white leading-tight">
+              Tu compra en Estados Unidos,<br className="sm:hidden" />
+              más fácil que nunca.
             </p>
+
             <div
-              className="mx-auto mt-4 w-20 h-1 rounded-full"
+              className="mx-auto mt-4 w-16 sm:w-20 h-1 rounded-full"
               style={{ backgroundColor: "#2ad37a" }}
             ></div>
           </div>
         </div>
+
       </div>
     </section>
   )

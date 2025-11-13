@@ -219,7 +219,7 @@ const ShippingSection: React.FC = () => {
             id="store-logos"
             className="observe"
             style={{
-              marginBottom: "5rem",
+              marginBottom: "2.5rem",
               opacity: visibleElements.has("store-logos") ? 1 : 0,
               transform: visibleElements.has("store-logos") ? "translateY(0)" : "translateY(30px)",
               transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s",
@@ -240,74 +240,65 @@ const ShippingSection: React.FC = () => {
 
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "2rem",
-                flexWrap: "wrap",
+                overflow: "hidden",
+                width: "100%",
+                cursor: "grab",
               }}
+              onPointerDown={onPointerDown}
+              onPointerMove={onPointerMove}
+              onPointerUp={endDrag}
+              onPointerLeave={endDrag}
             >
-
               <div
+                ref={scrollerRef}
                 style={{
-                  overflow: "hidden",
-                  flex: 1,
-                  cursor: "grab",
-                }}
-                onPointerDown={onPointerDown}
-                onPointerMove={onPointerMove}
-                onPointerUp={endDrag}
-                onPointerLeave={endDrag}
-              >
-                <div
-                  ref={scrollerRef}
-                  style={{
-                    display: "flex",
-                    whiteSpace: "nowrap",
-                    userSelect: "none",
-                  }}
-                >
-                  {[...stores, ...stores].map((store, index) => (
-                    <div
-                      key={`${store.name}-${index}`}
-                      style={{
-                        flex: "0 0 auto",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        padding: "0 1rem",
-                        minWidth: "80px",
-                      }}
-                    >
-                      <img
-                        src={store.logo}
-                        alt={store.name}
-                        style={{
-                          height: "45px",
-                          objectFit: "contain",
-                          maxWidth: "100%",
-                          pointerEvents: "none",
-                        }}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div
-                style={{
+                  display: "flex",
                   whiteSpace: "nowrap",
-                  fontSize: "1.55rem",
-                  fontWeight: 600,
-                  color: "#004a8a",
-                  letterSpacing: "0.05em",
-                  opacity: 0.8,
-                  transition: "opacity 0.3s ease",
+                  userSelect: "none",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
-                onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.8")}
               >
-                y muchas tiendas más...
+                {[...stores, ...stores].map((store, index) => (
+                  <div
+                    key={`${store.name}-${index}`}
+                    style={{
+                      flex: "0 0 auto",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      padding: "0 1rem",
+                      minWidth: "80px",
+                    }}
+                  >
+                    <img
+                      src={store.logo}
+                      alt={store.name}
+                      style={{
+                        height: "45px",
+                        objectFit: "contain",
+                        maxWidth: "100%",
+                        pointerEvents: "none",
+                      }}
+                    />
+                  </div>
+                ))}
               </div>
+            </div>
+
+            <div
+              style={{
+                marginTop: "1.8rem",
+                textAlign: "center",
+                fontSize: "1.55rem",
+                fontWeight: 600,
+                color: "#004a8a",
+                opacity: 0.85,
+                letterSpacing: "0.05em",
+                transition: "opacity 0.3s ease",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.85")}
+            >
+              y muchas tiendas más...
             </div>
           </div>
 
