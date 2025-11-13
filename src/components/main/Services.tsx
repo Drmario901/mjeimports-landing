@@ -1,5 +1,3 @@
-"use client"
-
 import type React from "react"
 import { useEffect, useRef, useState } from "react"
 import { Check, Shield, Zap, MapPin } from "lucide-react"
@@ -7,6 +5,53 @@ import { Check, Shield, Zap, MapPin } from "lucide-react"
 const ShippingSection: React.FC = () => {
   const [visibleElements, setVisibleElements] = useState<Set<string>>(new Set())
   const observerRef = useRef<IntersectionObserver | null>(null)
+
+  const scrollerRef = useRef<HTMLDivElement | null>(null)
+  const animationRef = useRef<number>()
+  const positionRef = useRef(0)
+
+  const isDraggingRef = useRef(false)
+  const dragStartX = useRef(0)
+  const savedPosition = useRef(0)
+
+  useEffect(() => {
+    const speed = 0.85
+
+    const animate = () => {
+      if (scrollerRef.current && !isDraggingRef.current) {
+        positionRef.current -= speed
+        scrollerRef.current.style.transform = `translateX(${positionRef.current}px)`
+
+        if (Math.abs(positionRef.current) >= scrollerRef.current.scrollWidth / 2) {
+          positionRef.current = 0
+        }
+      }
+      animationRef.current = requestAnimationFrame(animate)
+    }
+
+    animationRef.current = requestAnimationFrame(animate)
+    return () => cancelAnimationFrame(animationRef.current!)
+  }, [])
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    isDraggingRef.current = true
+    dragStartX.current = e.clientX
+    savedPosition.current = positionRef.current
+  }
+
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!isDraggingRef.current) return
+    const delta = e.clientX - dragStartX.current
+    positionRef.current = savedPosition.current + delta
+
+    if (scrollerRef.current) {
+      scrollerRef.current.style.transform = `translateX(${positionRef.current}px)`
+    }
+  }
+
+  const endDrag = () => {
+    isDraggingRef.current = false
+  }
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -56,17 +101,8 @@ const ShippingSection: React.FC = () => {
     },
   ]
 
-  const scrollAnimation = `
-    @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
-    }
-  `
-
   return (
     <>
-      <style>{scrollAnimation}</style>
-
       <section
         id="servicios"
         className="observe"
@@ -75,9 +111,9 @@ const ShippingSection: React.FC = () => {
           color: "#1f2937",
           position: "relative",
           overflow: "hidden",
-          padding: "5rem 2rem 6rem", 
+          padding: "5rem 2rem 6rem",
           minHeight: "calc(100vh - 60px)",
-          scrollMarginTop: "80px", 
+          scrollMarginTop: "80px",
         }}
       >
         <div
@@ -166,6 +202,7 @@ const ShippingSection: React.FC = () => {
               <br />
               Recibe en Venezuela
             </h1>
+
             <p
               style={{
                 fontSize: "clamp(1rem, 2vw, 1.25rem)",
@@ -203,41 +240,73 @@ const ShippingSection: React.FC = () => {
 
             <div
               style={{
-                overflow: "hidden",
-                position: "relative",
-                width: "100%",
-                padding: "2rem 0",
+                display: "flex",
+                alignItems: "center",
+                gap: "2rem",
+                flexWrap: "wrap",
               }}
             >
+
               <div
                 style={{
-                  display: "flex",
-                  animation: "scroll 25s linear infinite",
-                  width: "200%",
+                  overflow: "hidden",
+                  flex: 1,
+                  cursor: "grab",
                 }}
+                onPointerDown={onPointerDown}
+                onPointerMove={onPointerMove}
+                onPointerUp={endDrag}
+                onPointerLeave={endDrag}
               >
-                {[...stores, ...stores].map((store, index) => (
-                  <div
-                    key={`${store.name}-${index}`}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      padding: "0 3rem",
-                      opacity: 0.7,
-                      transition: "opacity 0.3s ease",
-                      flexShrink: 0,
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
-                    onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.7")}
-                  >
-                    <img
-                      src={store.logo}
-                      alt={store.name}
-                      style={{ height: 50, width: "auto", objectFit: "contain" }}
-                    />
-                  </div>
-                ))}
+                <div
+                  ref={scrollerRef}
+                  style={{
+                    display: "flex",
+                    whiteSpace: "nowrap",
+                    userSelect: "none",
+                  }}
+                >
+                  {[...stores, ...stores].map((store, index) => (
+                    <div
+                      key={`${store.name}-${index}`}
+                      style={{
+                        flex: "0 0 auto",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        padding: "0 1rem",
+                        minWidth: "80px",
+                      }}
+                    >
+                      <img
+                        src={store.logo}
+                        alt={store.name}
+                        style={{
+                          height: "45px",
+                          objectFit: "contain",
+                          maxWidth: "100%",
+                          pointerEvents: "none",
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div
+                style={{
+                  whiteSpace: "nowrap",
+                  fontSize: "1.55rem",
+                  fontWeight: 600,
+                  color: "#004a8a",
+                  letterSpacing: "0.05em",
+                  opacity: 0.8,
+                  transition: "opacity 0.3s ease",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.8")}
+              >
+                y muchas tiendas más...
               </div>
             </div>
           </div>
@@ -293,6 +362,7 @@ const ShippingSection: React.FC = () => {
                   >
                     <Icon size={32} color="#004a8a" />
                   </div>
+
                   <h3
                     style={{
                       fontSize: "1.5rem",
@@ -303,6 +373,7 @@ const ShippingSection: React.FC = () => {
                   >
                     {feature.title}
                   </h3>
+
                   <p style={{ fontSize: "1rem", color: "#6b7280", lineHeight: 1.6 }}>
                     {feature.description}
                   </p>
