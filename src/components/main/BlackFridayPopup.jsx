@@ -235,7 +235,7 @@ export default function BlackFridayModal({ active = true }) {
         {["amazon", "shein", "nike", "apple", "adidas", "ebay", "vans", "walmart"].map((s) => (
           <img
             key={s}
-            src={`/stores/${s}.png`}
+            src={`/stores/${s}.webp`}
             alt={s}
             style={{ height: 28, width: "auto", objectFit: "contain" }}
             loading="lazy"

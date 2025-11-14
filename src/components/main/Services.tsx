@@ -48,14 +48,14 @@ const ShippingSection: React.FC = () => {
 
   const paymentMethods = ["Zelle", "Pago Móvil", "Efectivo", "Binance"]
   const stores = [
-    { name: "Amazon", logo: "/stores/amazon.png" },
-    { name: "Adidas", logo: "/stores/adidas.png" },
-    { name: "Apple", logo: "/stores/apple.png" },
-    { name: "Nike", logo: "/stores/nike.png" },
-    { name: "Ebay", logo: "/stores/ebay.png" },
-    { name: "Shein", logo: "/stores/shein.png" },
-    { name: "Vans", logo: "/stores/vans.png" },
-    { name: "Walmart", logo: "/stores/walmart.png" },
+    { name: "Amazon", logo: "/stores/amazon.webp" },
+    { name: "Adidas", logo: "/stores/adidas.webp" },
+    { name: "Apple", logo: "/stores/apple.webp" },
+    { name: "Nike", logo: "/stores/nike.webp" },
+    { name: "Ebay", logo: "/stores/ebay.webp" },
+    { name: "Shein", logo: "/stores/shein.webp" },
+    { name: "Vans", logo: "/stores/vans.webp" },
+    { name: "Walmart", logo: "/stores/walmart.webp" },
   ]
 
   const features = [
