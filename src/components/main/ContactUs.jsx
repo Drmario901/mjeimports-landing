@@ -82,7 +82,6 @@ export default function ContactForm() {
       return
     }
 
-    // Validación rápida (mensaje opcional)
     if (!formData.name || !formData.email || !formData.phone) {
       Swal.fire({
         icon: "warning",
@@ -172,7 +171,6 @@ export default function ContactForm() {
       }
 
       if (detail && typeof detail === "object") {
-        // p.ej. Turnstile error-codes
         if (Array.isArray(detail["error-codes"])) {
           fullMessage += `\n\nCódigos: ${detail["error-codes"].join(", ")}`
         } else {
@@ -190,7 +188,6 @@ export default function ContactForm() {
           confirmButtonColor: "#002f6c",
         })
       } else if (status === 403) {
-        // Resetear Turnstile al fallar verificación
         try {
           if (window?.turnstile && turnstileRef.current) {
             window.turnstile.reset(turnstileRef.current)
