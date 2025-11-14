@@ -11,7 +11,7 @@ const ShippingSection: React.FC = () => {
   const positionRef = useRef(0)
 
   useEffect(() => {
-    const speed = 0.87
+    const speed = 0.90
 
     const animate = () => {
       if (scrollerRef.current) {

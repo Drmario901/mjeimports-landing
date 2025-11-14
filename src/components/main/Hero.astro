@@ -1,6 +1,7 @@
 ---
 import { Plane, Check, ArrowRight, Package, Truck, Shield, Clock } from '@lucide/astro';
-import { Picture } from "astro:assets";
+
+import { Image, Picture } from "astro:assets";
 
 import DeskHero from "../../assets/desk-hero.webp";
 import ResHero from "../../assets/res-hero.webp";
@@ -9,19 +10,8 @@ import FlagUSA from "../../assets/flags/usa.png";
 import FlagVE from "../../assets/flags/venezuela.png";
 ---
 
-<link
-  rel="preload"
-  fetchpriority="high"
-  as="image"
-  href={DeskHero.src}
-/>
-<link
-  rel="preload"
-  fetchpriority="high"
-  as="image"
-  media="(max-width: 768px)"
-  href={ResHero.src}
-/>
+<link rel="preload" as="image" href={DeskHero.src} media="(min-width: 769px)" />
+<link rel="preload" as="image" href={ResHero.src} media="(max-width: 768px)" />
 
 <style>
   html {
@@ -37,42 +27,26 @@ import FlagVE from "../../assets/flags/venezuela.png";
     opacity: 1;
     transform: translateY(0);
   }
-
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    z-index: 0;
-    transition: opacity 0.4s ease;
-  }
-
-  .hero-desktop { display: block; }
-  .hero-mobile { display: none; }
-
-  @media (max-width: 768px) {
-    .hero-desktop { display: none; }
-    .hero-mobile { display: block; }
-  }
 </style>
 
-<section id="inicio" class="relative text-white py-24 px-6 overflow-hidden">
+<section id="inicio" class="relative text-white overflow-hidden">
 
-  <div
-    class="hero-bg hero-desktop"
-    style={`background-image: url(${DeskHero.src});`}
-    aria-hidden="true"
-  ></div>
+  <picture class="absolute inset-0 z-0">
+    <source srcset={DeskHero.src} media="(min-width: 769px)" />
+    <source srcset={ResHero.src} media="(max-width: 768px)" />
+    <img
+      src={DeskHero.src}
+      alt="Envíos desde USA a Venezuela"
+      fetchpriority="high"
+      decoding="async"
+      class="w-full h-full object-cover"
+      style="position:absolute; inset:0;"
+    />
+  </picture>
 
-  <div
-    class="hero-bg hero-mobile"
-    style={`background-image: url(${ResHero.src});`}
-    aria-hidden="true"
-  ></div>
+  <div class="absolute inset-0 z-[1] bg-gradient-to-b from-[#002f6c88] to-[#002f6cdd]"></div>
 
-  <div class="absolute inset-0 bg-gradient-to-b from-[#002f6c8c] to-[#002f6cbf] z-1"></div>
-
-  <div class="absolute inset-0 opacity-10 z-0" aria-hidden="true">
+  <div class="absolute inset-0 opacity-10 z-[2]">
     <div class="absolute top-20 left-10 animate-float">
       <Package size={40} class="text-white/20" />
     </div>
@@ -84,36 +58,20 @@ import FlagVE from "../../assets/flags/venezuela.png";
     </div>
   </div>
 
-  <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10">
+  <div class="relative z-[3] max-w-7xl mx-auto py-24 px-6 flex flex-col lg:flex-row items-center justify-between gap-12">
 
-    <div class="order-1 lg:order-none text-center lg:text-left space-y-8 max-w-2xl">
+    <div class="text-center lg:text-left space-y-8 max-w-2xl">
 
       <h1 class="text-4xl sm:text-5xl font-bold leading-tight reveal">
-        Traemos tus productos desde 
+        Traemos tus productos desde
         <span class="inline-flex items-center gap-3 text-[#2ad37a]">
           USA
-          <Picture 
-            src={FlagUSA}
-            alt="Bandera de Estados Unidos"
-            width={40}
-            height={24}
-            formats={['webp']}
-            loading="eager"
-            class="h-10 w-auto object-contain"
-          />
+          <img src={FlagUSA.src} alt="USA" class="h-10 w-auto" loading="eager" />
         </span>
-
+        hasta
         <span class="inline-flex items-center gap-3 text-[#2ad37a]">
-          hasta Venezuela
-          <Picture 
-            src={FlagVE}
-            alt="Bandera de Venezuela"
-            width={40}
-            height={24}
-            formats={['webp']}
-            loading="eager"
-            class="h-10 w-auto object-contain"
-          />
+          Venezuela
+          <img src={FlagVE.src} alt="Venezuela" class="h-10 w-auto" loading="eager" />
         </span>
       </h1>
 
@@ -125,34 +83,28 @@ import FlagVE from "../../assets/flags/venezuela.png";
         Fácil, rápido y sin complicaciones.
       </p>
 
-      <ul class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10 reveal space-y-4 text-white/90">
-        <li class="flex gap-3 justify-center lg:justify-start">
-          <div class="w-6 h-6 bg-[#2ad37a] rounded-full flex justify-center items-center">
-            <Check size={14} class="text-white" />
-          </div>
-          <span>Envíos aéreos semanales y marítimos mensuales</span>
-        </li>
-        <li class="flex gap-3 justify-center lg:justify-start">
-          <div class="w-6 h-6 bg-[#2ad37a] rounded-full flex justify-center items-center">
-            <Check size={14} class="text-white" />
-          </div>
-          <span>Solo 50% de adelanto para encargar tu producto</span>
-        </li>
-        <li class="flex gap-3 justify-center lg:justify-start">
-          <div class="w-6 h-6 bg-[#2ad37a] rounded-full flex justify-center items-center">
-            <Check size={14} class="text-white" />
-          </div>
-          <span>Seguimiento personalizado de tu pedido</span>
-        </li>
-        <li class="flex gap-3 justify-center lg:justify-start">
-          <div class="w-6 h-6 bg-[#2ad37a] rounded-full flex justify-center items-center">
-            <Check size={14} class="text-white" />
-          </div>
-          <span>Precios justos y entrega garantizada</span>
-        </li>
-      </ul>
+      <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10 reveal">
+        <ul class="space-y-4 text-white/90">
+          {
+            [
+              "Envíos aéreos semanales y marítimos mensuales",
+              "Solo 50% de adelanto para encargar tu producto",
+              "Seguimiento personalizado de tu pedido",
+              "Precios justos y entrega garantizada",
+            ].map((txt) => (
+              <li class="flex items-start gap-3 justify-center lg:justify-start">
+                <div class="flex-shrink-0 w-6 h-6 bg-[#2ad37a] rounded-full flex items-center justify-center">
+                  <Check size={14} class="text-white" />
+                </div>
+                <span class="text-base sm:text-lg">{txt}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
 
       <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-6 reveal">
+
         <a
           href="#servicios"
           class="group bg-[#2ad37a] text-[#002f6c] hover:bg-[#25b86a] hover:scale-105 transition-all duration-300 font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl flex items-center justify-center"
@@ -168,12 +120,14 @@ import FlagVE from "../../assets/flags/venezuela.png";
           <Plane size={18} class="mr-2 group-hover:rotate-12 transition-transform" />
           <span>Solicitar Encargo</span>
         </a>
+
       </div>
+
     </div>
 
-    <div class="order-2 lg:order-none w-full max-w-md grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <div class="w-full max-w-md grid grid-cols-1 sm:grid-cols-2 gap-6">
 
-      <div class="backdrop-blur-md bg-white/10 rounded-2xl p-8 border border-white/20 transition-all duration-300 reveal hover:bg-white/15 shadow-md">
+      <div class="backdrop-blur-md bg-white/10 rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 reveal shadow-md">
         <div class="text-center space-y-4">
           <div class="w-16 h-16 bg-[#2ad37a] rounded-full flex items-center justify-center mx-auto">
             <Truck size={32} class="text-white" />
@@ -183,7 +137,7 @@ import FlagVE from "../../assets/flags/venezuela.png";
         </div>
       </div>
 
-      <div class="backdrop-blur-md bg-white/10 rounded-2xl p-8 border border-white/20 transition-all duration-300 reveal hover:bg-white/15 shadow-md">
+      <div class="backdrop-blur-md bg-white/10 rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 reveal shadow-md">
         <div class="text-center space-y-4">
           <div class="w-16 h-16 bg-[#002f6c] rounded-full flex items-center justify-center mx-auto">
             <Shield size={32} class="text-white" />
@@ -193,7 +147,7 @@ import FlagVE from "../../assets/flags/venezuela.png";
         </div>
       </div>
 
-      <div class="backdrop-blur-md bg-white/10 rounded-2xl p-8 border border-white/20 transition-all duration-300 reveal hover:bg-white/15 shadow-md">
+      <div class="backdrop-blur-md bg-white/10 rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 reveal shadow-md">
         <div class="text-center space-y-4">
           <div class="w-16 h-16 bg-[#2ad37a] rounded-full flex items-center justify-center mx-auto">
             <Package size={32} class="text-white" />
@@ -203,7 +157,7 @@ import FlagVE from "../../assets/flags/venezuela.png";
         </div>
       </div>
 
-      <div class="backdrop-blur-md bg-white/10 rounded-2xl p-8 border border-white/20 transition-all duration-300 reveal hover:bg-white/15 shadow-md">
+      <div class="backdrop-blur-md bg-white/10 rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 reveal shadow-md">
         <div class="text-center space-y-4">
           <div class="w-16 h-16 bg-[#002f6c] rounded-full flex items-center justify-center mx-auto">
             <Clock size={32} class="text-white" />
@@ -214,6 +168,7 @@ import FlagVE from "../../assets/flags/venezuela.png";
       </div>
 
     </div>
+
   </div>
 </section>
 
