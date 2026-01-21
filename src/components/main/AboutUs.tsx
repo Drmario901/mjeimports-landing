@@ -1,5 +1,7 @@
+"use client"
+
 import { useEffect, useRef, useState } from "react"
-import { ShoppingBag, Plane, ShieldCheck } from "lucide-react"
+import { ShoppingBag, Plane, ShieldCheck, MapPin } from "lucide-react"
 
 export default function AboutUs() {
   const [isVisible, setIsVisible] = useState({
@@ -21,15 +23,19 @@ export default function AboutUs() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const id = Object.entries(refs).find(([_, ref]) => ref.current === entry.target)?.[0]
+            const id = Object.entries(refs).find(
+              ([_, ref]) => ref.current === entry.target
+            )?.[0]
             if (id) setIsVisible((prev) => ({ ...prev, [id]: true }))
           }
         })
       },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
     )
 
-    Object.values(refs).forEach((ref) => ref.current && observer.observe(ref.current))
+    Object.values(refs).forEach(
+      (ref) => ref.current && observer.observe(ref.current)
+    )
     return () => observer.disconnect()
   }, [])
 
@@ -44,7 +50,9 @@ export default function AboutUs() {
         <div
           ref={refs.header}
           className={`mt-20 transition-all duration-700 ${
-            isVisible.header ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            isVisible.header
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-6"
           }`}
         >
           <h2
@@ -53,30 +61,38 @@ export default function AboutUs() {
           >
             ¿Quiénes Somos?
           </h2>
-          <p className="text-lg font-semibold" style={{ color: "#2ad37a" }}>
-            📍 Maracay, Venezuela 
-          </p>
+
+          <div className="flex items-center justify-center gap-2 font-semibold text-lg">
+            <MapPin size={20} style={{ color: "#2ad37a" }} />
+            <span style={{ color: "#2ad37a" }}>Maracay, Venezuela</span>
+          </div>
         </div>
 
         <div
           ref={refs.content}
           className={`mt-10 transition-all duration-700 delay-200 ${
-            isVisible.content ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            isVisible.content
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-6"
           }`}
         >
           <p className="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
-            Somos una <strong>empresa venezolana</strong> dedicada a conectar tus compras en Estados Unidos con Venezuela.
-            Ofrecemos un servicio confiable y transparente, encargándonos de todo el proceso con envíos aéreos y marítimos para que importar sea fácil, rápido y seguro.
+            Somos una <strong>empresa venezolana</strong> dedicada a conectar tus
+            compras en Estados Unidos con Venezuela. Ofrecemos un servicio
+            confiable y transparente, encargándonos de todo el proceso con
+            envíos aéreos y marítimos para que importar sea fácil, rápido y
+            seguro.
           </p>
         </div>
 
         <div
           ref={refs.cards}
-          className={`grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 justify-center transition-all duration-700 delay-400 ${
-            isVisible.cards ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          className={`grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 transition-all duration-700 delay-400 ${
+            isVisible.cards
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-6"
           }`}
         >
-
           <div className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 text-center">
             <div
               className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
@@ -84,11 +100,15 @@ export default function AboutUs() {
             >
               <ShoppingBag size={34} style={{ color: "#002f6c" }} />
             </div>
-            <h3 className="text-xl font-semibold mb-2" style={{ color: "#002f6c" }}>
+            <h3
+              className="text-xl font-semibold mb-2"
+              style={{ color: "#002f6c" }}
+            >
               Compras Internacionales
             </h3>
             <p className="text-gray-600 text-sm">
-              Traemos tus productos favoritos de EE. UU. con atención personalizada y total transparencia.
+              Traemos tus productos favoritos de EE. UU. con atención
+              personalizada y total transparencia.
             </p>
           </div>
 
@@ -99,11 +119,15 @@ export default function AboutUs() {
             >
               <Plane size={34} style={{ color: "#002f6c" }} />
             </div>
-            <h3 className="text-xl font-semibold mb-2" style={{ color: "#002f6c" }}>
+            <h3
+              className="text-xl font-semibold mb-2"
+              style={{ color: "#002f6c" }}
+            >
               Envíos Seguros
             </h3>
             <p className="text-gray-600 text-sm">
-              Ofrecemos envíos aéreos y marítimos adaptados a tus tiempos, con seguimiento en todo momento.
+              Ofrecemos envíos aéreos y marítimos adaptados a tus tiempos, con
+              seguimiento en todo momento.
             </p>
           </div>
 
@@ -114,19 +138,25 @@ export default function AboutUs() {
             >
               <ShieldCheck size={34} style={{ color: "#002f6c" }} />
             </div>
-            <h3 className="text-xl font-semibold mb-2" style={{ color: "#002f6c" }}>
+            <h3
+              className="text-xl font-semibold mb-2"
+              style={{ color: "#002f6c" }}
+            >
               Confianza Garantizada
             </h3>
             <p className="text-gray-600 text-sm">
-              Nuestro compromiso es tu tranquilidad. Cumplimos cada entrega con seguridad y responsabilidad.
+              Nuestro compromiso es tu tranquilidad. Cumplimos cada entrega con
+              seguridad y responsabilidad.
             </p>
           </div>
         </div>
-
+        
         <div
           ref={refs.slogan}
           className={`mt-20 transition-all duration-700 delay-600 ${
-            isVisible.slogan ? "opacity-100 scale-100" : "opacity-0 scale-95"
+            isVisible.slogan
+              ? "opacity-100 scale-100"
+              : "opacity-0 scale-95"
           }`}
         >
           <div
@@ -134,14 +164,15 @@ export default function AboutUs() {
             style={{ backgroundColor: "#002f6c", borderColor: "#2ad37a" }}
           >
             <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white leading-tight">
-              Tu compra en Estados Unidos,<br className="sm:hidden" />
+              Tu compra en Estados Unidos,
+              <br className="sm:hidden" />
               más fácil que nunca.
             </p>
 
             <div
               className="mx-auto mt-4 w-16 sm:w-20 h-1 rounded-full"
               style={{ backgroundColor: "#2ad37a" }}
-            ></div>
+            />
           </div>
         </div>
 

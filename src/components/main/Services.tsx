@@ -1,33 +1,29 @@
+"use client"
+
 import type React from "react"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, useCallback } from "react"
 import { Check, Shield, Zap, MapPin } from "lucide-react"
+import useEmblaCarousel from "embla-carousel-react"
+import AutoScroll from "embla-carousel-auto-scroll"
 
 const ShippingSection: React.FC = () => {
   const [visibleElements, setVisibleElements] = useState<Set<string>>(new Set())
   const observerRef = useRef<IntersectionObserver | null>(null)
 
-  const scrollerRef = useRef<HTMLDivElement | null>(null)
-  const animationRef = useRef<number>()
-  const positionRef = useRef(0)
-
-  useEffect(() => {
-    const speed = 0.90
-
-    const animate = () => {
-      if (scrollerRef.current) {
-        positionRef.current -= speed
-        scrollerRef.current.style.transform = `translateX(${positionRef.current}px)`
-
-        if (Math.abs(positionRef.current) >= scrollerRef.current.scrollWidth / 2) {
-          positionRef.current = 0
-        }
-      }
-      animationRef.current = requestAnimationFrame(animate)
-    }
-
-    animationRef.current = requestAnimationFrame(animate)
-    return () => cancelAnimationFrame(animationRef.current!)
-  }, [])
+  const [emblaRef] = useEmblaCarousel(
+    {
+      align: "start",
+      loop: true,
+      dragFree: true,
+    },
+    [
+      AutoScroll({
+        speed: 1,
+        stopOnInteraction: false,
+        stopOnMouseEnter: false,
+      }),
+    ]
+  )
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -38,7 +34,7 @@ const ShippingSection: React.FC = () => {
           }
         })
       },
-      { threshold: 0.15 },
+      { threshold: 0.15 }
     )
 
     const elements = document.querySelectorAll(".observe")
@@ -62,74 +58,52 @@ const ShippingSection: React.FC = () => {
     {
       icon: Shield,
       title: "Seguridad Garantizada",
-      description: "Tus paquetes están protegidos con seguro completo durante todo el trayecto.",
+      description:
+        "Tus paquetes están protegidos con seguro completo durante todo el trayecto.",
     },
     {
       icon: Zap,
       title: "Envío Rápido",
-      description: "Recibe tus productos en tiempo récord con nuestro servicio express.",
+      description:
+        "Recibe tus productos en tiempo récord con nuestro servicio express.",
     },
     {
       icon: MapPin,
       title: "Cobertura Nacional",
-      description: "Entregamos en todo el territorio venezolano sin importar tu ubicación.",
+      description:
+        "Entregamos en todo el territorio venezolano sin importar tu ubicación.",
     },
   ]
+
+  const duplicatedStores = [...stores, ...stores, ...stores]
 
   return (
     <section
       id="servicios"
-      className="observe"
+      className="observe relative overflow-hidden text-gray-800 px-8 pt-28 pb-20 min-h-[calc(100vh-60px)]"
       style={{
-        background: "#ffffff",
-        color: "#1f2937",
-        position: "relative",
-        overflow: "hidden",
-        padding: "5rem 2rem 6rem",
-        minHeight: "calc(100vh - 60px)",
+        background: "linear-gradient(135deg, rgba(42, 211, 122, 0.18) 0%, rgba(255, 255, 255, 0.95) 50%, rgba(12, 57, 115, 0.22) 100%)",
       }}
     >
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "linear-gradient(90deg, rgba(0,74,138,0.05) 1px, transparent 1px), linear-gradient(rgba(0,74,138,0.05) 1px, transparent 1px)",
-          backgroundSize: "100px 100px",
-          pointerEvents: "none",
-        }}
-      />
 
-      <div style={{ maxWidth: "1200px", margin: "0 auto", position: "relative", zIndex: 1 }}>
-
+      <div className="max-w-[1200px] mx-auto relative z-10">
         <div
           id="payment-methods"
-          className="observe"
-          style={{
-            marginBottom: "4rem",
-            opacity: visibleElements.has("payment-methods") ? 1 : 0,
-            transform: visibleElements.has("payment-methods") ? "translateY(0)" : "translateY(30px)",
-            transition: "opacity 0.7s ease, transform 0.7s ease",
-          }}
+          className={`observe mb-16 transition-all duration-700 ${
+            visibleElements.has("payment-methods")
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-8"
+          }`}
         >
-          <h3
-            style={{
-              fontSize: "2rem",
-              fontWeight: 500,
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
-              color: "#004a8a",
-              marginBottom: "1.5rem",
-            }}
-          >
+          <h3 className="text-2xl font-medium uppercase tracking-widest text-[#004a8a] mb-6">
             Métodos de Pago
           </h3>
 
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "1.5rem" }}>
+          <div className="flex flex-wrap gap-6">
             {paymentMethods.map((method) => (
-              <div key={method} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <Check style={{ width: 20, height: 20, color: "#004a8a" }} />
-                <span style={{ fontSize: "1.2rem", color: "#1f2937" }}>{method}</span>
+              <div key={method} className="flex items-center gap-2">
+                <Check className="w-5 h-5 text-[#004a8a]" />
+                <span className="text-xl text-gray-800">{method}</span>
               </div>
             ))}
           </div>
@@ -137,166 +111,84 @@ const ShippingSection: React.FC = () => {
 
         <div
           id="main-heading"
-          className="observe"
-          style={{
-            marginBottom: "5rem",
-            opacity: visibleElements.has("main-heading") ? 1 : 0,
-            transform: visibleElements.has("main-heading") ? "translateY(0)" : "translateY(30px)",
-            transition: "opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s",
-          }}
+          className={`observe mb-20 transition-all duration-700 delay-200 ${
+            visibleElements.has("main-heading")
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-8"
+          }`}
         >
-          <h1
-            style={{
-              fontSize: "clamp(2.5rem, 8vw, 5rem)",
-              fontWeight: 700,
-              color: "#004a8a",
-              marginBottom: "1.5rem",
-            }}
-          >
-            Compra en USA,<br />Recibe en Venezuela
+          <h1 className="text-[clamp(2.5rem,8vw,5rem)] font-bold text-[#004a8a] mb-6">
+            Compra en USA,
+            <br />
+            Recibe en Venezuela
           </h1>
-          <p style={{ fontSize: "1.25rem", color: "#6b7280", maxWidth: "600px", lineHeight: 1.6 }}>
-            La forma más confiable y rápida de recibir tus compras internacionales
+          <p className="text-xl text-gray-500 max-w-[600px] leading-relaxed">
+            La forma más confiable y rápida de recibir tus compras
+            internacionales
           </p>
         </div>
 
         <div
           id="store-logos"
-          className="observe"
-          style={{
-            marginBottom: "2.5rem",
-            opacity: visibleElements.has("store-logos") ? 1 : 0,
-            transform: visibleElements.has("store-logos") ? "translateY(0)" : "translateY(30px)",
-            transition: "opacity 0.7s ease 0.4s, transform 0.7s ease 0.4s",
-          }}
+          className={`observe mb-10 transition-all duration-700 delay-[400ms] ${
+            visibleElements.has("store-logos")
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-8"
+          }`}
         >
-          <p
-            style={{
-              fontSize: "1.45rem",
-              textTransform: "uppercase",
-              textAlign: "center",
-              color: "#004a8a",
-              marginBottom: "2rem",
-            }}
-          >
+          <p className="text-[1.45rem] uppercase text-center text-[#004a8a] mb-8">
             Compra en tus tiendas favoritas
           </p>
 
-          <div style={{ overflow: "hidden", width: "100%" }}>
-            <div
-              ref={scrollerRef}
-              style={{
-                display: "flex",
-                whiteSpace: "nowrap",
-                userSelect: "none",
-              }}
-            >
-              {[...stores, ...stores].map((store, index) => (
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div className="flex gap-8 md:gap-12">
+              {duplicatedStores.map((store, index) => (
                 <div
-                  key={store.name + index}
-                  style={{
-                    flex: "0 0 auto",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    padding: "0 1rem",
-                    minWidth: "80px",
-                  }}
+                  key={`${store.name}-${index}`}
+                  className="flex-shrink-0"
                 >
                   <img
-                    src={store.logo}
+                    src={store.logo || "/placeholder.svg"}
                     alt={store.name}
-                    style={{ height: "45px", objectFit: "contain" }}
+                    className="h-10 md:h-12 w-auto object-contain"
                   />
                 </div>
               ))}
             </div>
           </div>
 
-          <div
-            style={{
-              marginTop: "1.8rem",
-              textAlign: "center",
-              fontSize: "1.55rem",
-              fontWeight: 600,
-              color: "#004a8a",
-              opacity: 0.85,
-            }}
-          >
+          <div className="mt-7 text-center text-2xl font-semibold text-[#004a8a] opacity-85">
             y muchas tiendas más...
           </div>
         </div>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "2rem",
-            marginTop: "4rem",
-          }}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
           {features.map((feature, index) => {
             const Icon = feature.icon
             const isVisible = visibleElements.has(`feature-${index}`)
-            const delay = 0.6 + index * 0.1
 
             return (
               <div
                 key={feature.title}
                 id={`feature-${index}`}
-                className="observe"
+                className={`observe bg-white rounded-2xl p-10 shadow-sm border border-gray-200 transition-all duration-800 hover:shadow-[0_12px_22px_rgba(0,47,108,0.25)] hover:-translate-y-1.5 hover:border-[#002f6c] ${
+                  isVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-8"
+                }`}
                 style={{
-                  background: "#ffffff",
-                  borderRadius: "16px",
-                  padding: "2.5rem",
-
-                  opacity: isVisible ? 1 : 0,
-                  transform: isVisible ? "translateY(0)" : "translateY(30px)",
-                  transition: `opacity 0.8s ease ${delay}s, transform 0.8s ease ${delay}s`,
-
-                  boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
-                  border: "1px solid #e5e7eb",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transition = "box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease"
-                  e.currentTarget.style.boxShadow = "0 12px 22px rgba(0,47,108,0.25)"
-                  e.currentTarget.style.transform = "translateY(-6px)"
-                  e.currentTarget.style.borderColor = "#002f6c"
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transition = "box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease"
-                  e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,0.08)"
-                  e.currentTarget.style.transform = "translateY(0)"
-                  e.currentTarget.style.borderColor = "#e5e7eb"
+                  transitionDelay: isVisible ? `${600 + index * 100}ms` : "0ms",
                 }}
               >
-                <div
-                  style={{
-                    width: "64px",
-                    height: "64px",
-                    borderRadius: "14px",
-                    backgroundColor: "#002f6c15",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginBottom: "1.5rem",
-                  }}
-                >
-                  <Icon size={34} style={{ color: "#002f6c" }} />
+                <div className="w-16 h-16 rounded-[14px] bg-[#002f6c]/10 flex items-center justify-center mb-6">
+                  <Icon size={34} className="text-[#002f6c]" />
                 </div>
 
-                <h3
-                  style={{
-                    fontSize: "1.5rem",
-                    fontWeight: 700,
-                    marginBottom: "1rem",
-                    color: "#002f6c",
-                  }}
-                >
+                <h3 className="text-2xl font-bold mb-4 text-[#002f6c]">
                   {feature.title}
                 </h3>
 
-                <p style={{ fontSize: "1rem", color: "#4b5563", lineHeight: 1.6 }}>
+                <p className="text-base text-gray-600 leading-relaxed">
                   {feature.description}
                 </p>
               </div>

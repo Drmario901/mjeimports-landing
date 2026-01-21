@@ -17,12 +17,15 @@
     "astro": "^5.15.4",
     "axios": "^1.12.2",
     "canvas-confetti": "^1.9.4",
+    "embla-carousel": "^8.6.0",
+    "embla-carousel-auto-scroll": "^8.6.0",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
     "flag-icons": "^7.5.0",
     "lucide-react": "^0.544.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-infinite-logo-slider": "^1.1.4",
     "react-modal": "^3.16.3",
     "react-toastify": "^11.0.5",
     "sharp": "^0.34.5",
@@ -30,6 +33,7 @@
     "tailwindcss": "^4.1.13"
   },
   "devDependencies": {
-    "daisyui": "^5.1.10"
+    "daisyui": "^5.1.10",
+    "tailwindcss-animate": "^1.0.7"
   }
 }

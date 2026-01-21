@@ -3,11 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Send, Calculator, ShoppingCart, Package } from "lucide-react"
 
-interface HowItWorksProps {
-  phoneNumber?: string
-}
-
-export default function HowItWorks({ phoneNumber = "1234567890" }: HowItWorksProps) {
+export default function HowItWorks() {
   const [visibleSteps, setVisibleSteps] = useState<boolean[]>([false, false, false, false])
   const stepRefs = useRef<(HTMLDivElement | null)[]>([])
 
@@ -71,152 +67,57 @@ export default function HowItWorks({ phoneNumber = "1234567890" }: HowItWorksPro
   ]
 
   return (
-    <>
-      <style>{`
-        .steps-grid {
-          display: grid;
-          gap: 24px;
-          grid-template-columns: repeat(4, 1fr);
-        }
+    <section
+      id="como-funciona"
+      className="min-h-screen flex flex-col items-center justify-center py-20 px-5 bg-gradient-to-br from-[#002f6c] via-[#004a8f] to-[#2ad37a]"
+    >
+      <div className="max-w-6xl w-full">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight text-balance">
+            Así Funciona{" "}
+            <span className="text-[#2ad37a] drop-shadow-lg">MJE Imports</span>
+          </h2>
+          <p className="text-lg text-white/80 max-w-xl mx-auto">
+            Un proceso simple y transparente para que recibas tus productos sin complicaciones.
+          </p>
+        </div>
 
-        @media (max-width: 1024px) {
-          .steps-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {steps.map((step, index) => {
+            const Icon = step.icon
+            return (
+              <div
+                key={index}
+                ref={(el) => { stepRefs.current[index] = el }}
+                className={`card bg-base-100 shadow-xl border border-base-200 relative pt-8 transition-all duration-500 ${
+                  visibleSteps[index]
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-8"
+                }`}
+                style={{ transitionDelay: `${index * 150}ms` }}
+              >
+                <div className="badge badge-lg badge-success text-white font-bold absolute -top-4 left-1/2 -translate-x-1/2 shadow-lg">
+                  {step.number}
+                </div>
 
-        @media (max-width: 640px) {
-          .steps-grid {
-            grid-template-columns: 1fr;
-          }
-        }
-      `}</style>
-
-      <section
-        id="como-funciona"
-        style={{
-          padding: "120px 20px 80px", 
-          backgroundColor: "#002f6c08",
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <div style={{ maxWidth: "1200px", width: "100%" }}>
-
-          <div style={{ textAlign: "center", marginBottom: "60px" }}>
-            <h2
-              style={{
-                fontSize: "48px",
-                fontWeight: "800",
-                color: "#002f6c",
-                marginBottom: "16px",
-                lineHeight: "1.2",
-              }}
-            >
-              🚀 Así Funciona{" "}
-              <span style={{ color: "#2ad37a" }}>
-                MJE Imports
-              </span>
-            </h2>
-            <p
-              style={{
-                fontSize: "18px",
-                color: "#4b5563",
-                maxWidth: "600px",
-                margin: "0 auto",
-              }}
-            >
-              Un proceso simple y transparente para que recibas tus productos sin complicaciones.
-            </p>
-          </div>
-
-          <div className="steps-grid">
-            {steps.map((step, index) => {
-              const Icon = step.icon
-              return (
-                <div
-                  key={index}
-                  ref={(el) => (stepRefs.current[index] = el)}
-                  style={{
-                    opacity: visibleSteps[index] ? 1 : 0,
-                    transform: visibleSteps[index] ? "translateY(0)" : "translateY(30px)",
-                    transition: `all 0.6s ease ${index * 0.15}s`,
-                    padding: "32px 24px",
-                    backgroundColor: "#ffffff",
-                    borderRadius: "20px",
-                    border: "1px solid #e5e7eb",
-                    textAlign: "center",
-                    boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
-                  }}
-                >
-
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: "-20px",
-                      left: "50%",
-                      transform: "translateX(-50%)",
-                      width: "42px",
-                      height: "42px",
-                      borderRadius: "50%",
-                      backgroundColor: "#2ad37a",
-                      color: "#fff",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontSize: "18px",
-                      fontWeight: "700",
-                      boxShadow: "0 4px 10px rgba(42, 211, 122, 0.3)",
-                    }}
-                  >
-                    {step.number}
+                <div className="card-body items-center text-center">
+                  <div className="w-16 h-16 rounded-full bg-[#002f6c]/10 flex items-center justify-center mb-4">
+                    <Icon size={32} className="text-[#002f6c]" strokeWidth={2.2} />
                   </div>
 
-                  <div
-                    style={{
-                      width: "75px",
-                      height: "75px",
-                      margin: "20px auto 20px",
-                      backgroundColor: "#002f6c15",
-                      borderRadius: "50%",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Icon size={38} color="#002f6c" strokeWidth={2.2} />
-                  </div>
-
-                  <h3
-                    style={{
-                      fontSize: "20px",
-                      fontWeight: "600",
-                      color: "#002f6c",
-                      marginBottom: "10px",
-                    }}
-                  >
+                  <h3 className="card-title text-[#002f6c] text-lg">
                     {step.title}
                   </h3>
 
-        
-                  <p
-                    style={{
-                      fontSize: "15px",
-                      color: "#6b7280",
-                      lineHeight: "1.6",
-                    }}
-                  >
+                  <p className="text-base-content/70 text-sm leading-relaxed">
                     {step.description}
                   </p>
                 </div>
-              )
-            })}
-          </div>
+              </div>
+            )
+          })}
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   )
 }
