@@ -6,12 +6,66 @@ import AboutUs from '../components/main/AboutUs.tsx';
 import HowItWorks from '../components/main/HowItWorks.tsx';
 import WhatsAppFloat from '../components/main/WhatsAppFloat.tsx';
 import ContactUs from '../components/main/ContactUs.jsx';
+// import PromosCarousel from '../components/main/PromosCarousel.tsx';
 // import BlackFridayPopup from '../components/main/BlackFridayPopup';
+import PromotionsModal from "../components/main/PromosCarousel.tsx"
+const demoSlides = [
+  {
+    id: "1",
+    backgroundSrc: "/promo-enero/adidas.jpg",
+    badge: "Precio de remate",
+    title: "Adidas Moves Him",
+    subtitle: "La mejor fragancia deportiva",
+    description: "Aprovecha descuentos exclusivos en fragancias seleccionadas.",
+    ctaText: "Presiona para contactar en WhatsApp",
+    ctaHref: "https://api.whatsapp.com/send/?phone=584142946305&text=Hola,%20estoy%20interesado%20en%20el%20precio%20de%20remate%20de%20Adidas%20Moves%20Him.",
+    overlayOpacity: 0.6,
+  },
+  {
+    id: "2",
+    backgroundSrc: "/promo-enero/bourbon.jpg",
+    badge: "Precio de remate",
+    title: "Lataffa Bourbor",
+    subtitle: "Exquisita fragancia arabe",
+    description: "Aprovecha descuentos exclusivos en fragancias seleccionadas.",
+    ctaText: "Presiona para contactar en WhatsApp",
+    ctaHref: "https://api.whatsapp.com/send/?phone=584142946305&text=Hola,%20estoy%20interesado%20en%20el%20precio%20de%20remate%20del%20Lataffa%20Bourbon.",
+    overlayOpacity: 0.6,
+  },
+  {
+    id: "3",
+    backgroundSrc: "/promo-enero/blue.jpg",
+    badge: "Precio de remate",
+    title: "Antonio Banderas - Blue Seduction",
+    subtitle: "Fragancia fresca y seductora",
+    description: "Aprovecha descuentos exclusivos en fragancias seleccionadas.",
+    ctaText: "Presiona para contactar en WhatsApp",
+    ctaHref: "https://api.whatsapp.com/send/?phone=584142946305&text=Hola,%20estoy%20interesado%20en%20el%20precio%20de%20remate%20del%20Antonio%20Banderas%20-%20Blue%20Seduction.",
+    overlayOpacity: 0.6,
+  },
+  {
+	id: "",
+    backgroundSrc: "/promo-enero/voyage.jpg",
+    badge: "Precio de remate",
+    title: "Nautica Voyage",
+    subtitle: "Perfume acuatico y irresistible",
+    description: "Aprovecha descuentos exclusivos en fragancias seleccionadas.",
+    ctaText: "Presiona para contactar en WhatsApp",
+    ctaHref: "https://api.whatsapp.com/send/?phone=584142946305&text=Hola,%20estoy%20interesado%20en%20el%20precio%20de%20remate%20del%20Nautica%20Voyage.",
+    overlayOpacity: 0.6,
+  }
+]
 ---
 
 <Layout>
 	<WhatsAppFloat phoneNumber="584142946305" message="¡Hola! estoy interesado en sus servicios" />
 	<!-- <BlackFridayPopup active={true} client:load/> -->
+	 <PromotionsModal client:load 
+	 	active={true}
+        monthLabel="Ofertas de Enero"
+        slides={demoSlides}
+        showDelayMs={500}
+        minIntervalDays={0} />
 	<Hero />
 	<ShippingSection client:load />
 	<AboutUs client:load/>
