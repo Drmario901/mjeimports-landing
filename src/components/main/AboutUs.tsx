@@ -3,6 +3,9 @@
 import { useEffect, useRef, useState } from "react"
 import { ShoppingBag, Plane, ShieldCheck, MapPin } from "lucide-react"
 
+const desktopBackground = "/barco-desk.webp"
+const mobileBackground = "/barco-res.webp"
+
 export default function AboutUs() {
   const [isVisible, setIsVisible] = useState({
     header: false,
@@ -40,12 +43,29 @@ export default function AboutUs() {
   }, [])
 
   return (
-    <section
+<section
       id="quienes-somos"
-      className="min-h-screen flex items-center justify-center py-24 px-6"
+      className="flex items-center justify-center py-16 md:py-24 px-6 relative overflow-hidden"
       style={{ backgroundColor: "#002f6c10" }}
     >
-      <div className="max-w-5xl w-full mx-auto text-center">
+      <div
+        className="absolute inset-0 md:hidden"
+        style={{
+          backgroundImage: `url(${mobileBackground})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
+        }}
+      />
+      <div
+        className="absolute inset-0 hidden md:block"
+        style={{
+          backgroundImage: `url(${desktopBackground})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center top",
+        }}
+      />
+      <div className="absolute inset-0 bg-white/80" />
+      <div className="max-w-5xl w-full mx-auto text-center relative z-10">
 
         <div
           ref={refs.header}

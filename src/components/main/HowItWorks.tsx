@@ -69,7 +69,7 @@ export default function HowItWorks() {
   return (
     <section
       id="como-funciona"
-      className="min-h-screen flex flex-col items-center justify-center py-20 px-5 bg-gradient-to-br from-[#002f6c] via-[#004a8f] to-[#2ad37a]"
+      className="min-h-screen flex flex-col items-center justify-center pt-32 pb-20 px-5 bg-gradient-to-br from-[#002f6c] via-[#004a8f] to-[#2ad37a]"
     >
       <div className="max-w-6xl w-full">
         <div className="text-center mb-16">
