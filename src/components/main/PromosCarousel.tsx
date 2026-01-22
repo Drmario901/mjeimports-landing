@@ -131,6 +131,7 @@ export default function PromotionsModal({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          padding: "16px", 
           opacity: closing ? 0 : 1,
           transition: "opacity 280ms ease",
         },
@@ -141,14 +142,22 @@ export default function PromotionsModal({
           padding: 0,
           maxWidth: "480px",
           width: "94%",
+          height: "auto",
+          maxHeight: "92vh", 
+          display: "flex",
+          flexDirection: "column",
         },
       }}
     >
       <div
         className={[
           "relative w-full overflow-hidden rounded-3xl bg-white shadow-[0_25px_60px_-12px_rgba(0,0,0,0.4)] transition-all duration-300",
+          "flex flex-col max-h-[92vh]", 
           closing ? "scale-95 translate-y-4 opacity-0" : "scale-100 translate-y-0 opacity-100",
         ].join(" ")}
+        style={{
+          minHeight: "78vh",
+        }}
       >
         <button
           onClick={handleClose}
@@ -158,7 +167,7 @@ export default function PromotionsModal({
           <X className="h-4 w-4" />
         </button>
 
-        <div className="relative">
+        <div className="relative flex-1">
           <div ref={emblaRef} className="overflow-hidden">
             <div className="flex">
               {slides.map((slide) => {
@@ -166,17 +175,19 @@ export default function PromotionsModal({
 
                 return (
                   <div key={slide.id} className="min-w-0 flex-[0_0_100%]">
-                    <div className="relative aspect-[4/5] w-full overflow-hidden">
+                    <div className="relative w-full overflow-hidden aspect-[3/4] sm:aspect-[4/5]">
                       <img
                         src={slide.backgroundSrc || "/placeholder.svg"}
                         alt={slide.title}
                         className="absolute inset-0 h-full w-full object-cover"
                       />
-                      
-                      <div 
+
+                      <div
                         className="absolute inset-0"
                         style={{
-                          background: `linear-gradient(to top, rgba(0,0,0,${overlay + 0.5}) 0%, rgba(0,0,0,${overlay * 0.3}) 40%, transparent 70%)`
+                          background: `linear-gradient(to top, rgba(0,0,0,${overlay + 0.5}) 0%, rgba(0,0,0,${
+                            overlay * 0.3
+                          }) 40%, transparent 70%)`,
                         }}
                       />
 
@@ -255,7 +266,7 @@ export default function PromotionsModal({
                 </p>
               )}
             </div>
-            
+
             {snapCount > 1 && (
               <div className="flex items-center gap-1.5">
                 {Array.from({ length: snapCount }).map((_, i) => {
@@ -267,9 +278,7 @@ export default function PromotionsModal({
                       aria-label={`Ir a la promo ${i + 1}`}
                       className={[
                         "h-2 rounded-full transition-all duration-300",
-                        activeDot 
-                          ? "w-6 bg-[#2ad37a]" 
-                          : "w-2 bg-[#002f6c]/20 hover:bg-[#002f6c]/30",
+                        activeDot ? "w-6 bg-[#2ad37a]" : "w-2 bg-[#002f6c]/20 hover:bg-[#002f6c]/30",
                       ].join(" ")}
                     />
                   )
